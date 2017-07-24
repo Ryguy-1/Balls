@@ -26,6 +26,7 @@ public class Runner {
 
 		frame.addKeyListener(panel);
 
+		frame.addMouseListener(panel);
 		setup();
 
 	}

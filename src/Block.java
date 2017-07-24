@@ -3,7 +3,7 @@ import java.awt.Graphics;
 public class Block extends GameObject {
 
 	int speed;
-	int turn = 0;
+	int turn;
 
 	public Block(int x, int y, int width, int height) {
 		super(x, y, width, height);
@@ -18,12 +18,35 @@ public class Block extends GameObject {
 	}
 
 	void update() {
-
+		
+		
+		//if(turn==0){
+			
+			//y+=speed;
+			
+			//turn+=1;
+		//}else if(turn==1){
+			
+			//y+=speed;
+			
+			//turn+=1;
+			//turnBefore+=1;
+			
+		//}
+		
+		
 		super.update();
 		turn = (turn + 1) % 60;
 		if (turn == 0) {
 
-			y += speed;
+		y += speed;
+			
+		
+			
+		
+			
+			
+			
 		}
 
 	}

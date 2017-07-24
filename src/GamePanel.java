@@ -5,19 +5,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class GamePanel extends JPanel implements ActionListener, KeyListener {
+public class GamePanel extends JPanel implements ActionListener, KeyListener, MouseListener {
 
 	Font bigFont;
 	Font smallFont;
 
+	int startX = 250;
+	int startY= 700;
+	
 	ArrayList<Integer> keys = new ArrayList<>();
 
-	Character character = new Character(250, 700, 50, 50);
+	Character character = new Character(startX, startY, 50, 50);
 
 	ObjectManager manager = new ObjectManager();
 
@@ -151,7 +157,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 
-			manager.addObject(new Projectile(character.x + 20, character.y, 10, 10));
+			//manager.addObject(new Projectile(character.x + 20, character.y, 10, 10, new Random().nextFloat()));
 
 		}
 
@@ -169,6 +175,57 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+		
+		
+		if (currentState == GAME_STATE){
+			
+			int newX = startX-e.getX();
+			int newY = startY-e.getY();
+			float angle = 0;
+			if(newX > 0){
+				angle = (float)Math.atan((float)newX/ (float)newY );
+			}else{
+				angle = (float)Math.atan((float)newY/ (float)newX);
+			}
+			
+			
+		
+			
+			System.out.println(angle);
+			manager.addObject(new Projectile(startX+20, startY+20, 10, 10, angle));
+			
+		}
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
