@@ -48,17 +48,9 @@ public class Projectile extends GameObject {
 			angle += Math.PI/2;
 			
 		}
-		if (y>Runner.height-10&&x>250){
+		if (y>Runner.height-10){
 			
 			//reset round
-			
-			
-			//Testing Purposes:
-			angle -= Math.PI/2;
-			
-		}else if(y<Runner.height&&x<250){
-			
-			angle += Math.PI/2;
 			
 		}
 			
