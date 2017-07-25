@@ -18,7 +18,7 @@ public class ObjectManager {
 	public void addObject(GameObject o) {
 		objects.add(o);
 	}
-
+	
 	public void update() {
 		
 		

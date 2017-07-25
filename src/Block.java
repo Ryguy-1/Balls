@@ -18,35 +18,33 @@ public class Block extends GameObject {
 	}
 
 	void update() {
-		
-		
-		//if(turn==0){
-			
-			//y+=speed;
-			
-			//turn+=1;
-		//}else if(turn==1){
-			
-			//y+=speed;
-			
-			//turn+=1;
-			//turnBefore+=1;
-			
-		//}
-		
-		
+
+		// if(turn==0){
+
+		// y+=speed;
+
+		// turn+=1;
+		// }else if(turn==1){
+
+		// y+=speed;
+
+		// turn+=1;
+		// turnBefore+=1;
+
+		// }
+
 		super.update();
 		turn = (turn + 1) % 60;
 		if (turn == 0) {
 
-		y += speed;
-			
-		
-			
-		
-			
-			
-			
+			y += speed;
+
+			if (y > 750) {
+
+				GamePanel.currentState = GamePanel.END_STATE;
+
+			}
+
 		}
 
 	}

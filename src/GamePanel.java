@@ -29,11 +29,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 
 	Timer timer;
 
-	final int MENU_STATE = 0;
-	final int GAME_STATE = 1;
-	final int END_STATE = 2;
+	static final int MENU_STATE = 0;
+	static final int GAME_STATE = 1;
+	static final int END_STATE = 2;
 
-	int currentState = MENU_STATE;
+	static int currentState = MENU_STATE;
 
 	public void paintComponent(Graphics g) {
 
@@ -167,6 +167,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 
 		}
 		if (currentState > END_STATE) {
+			manager.reset();
 			currentState = MENU_STATE;
 		}
 	}
@@ -182,7 +183,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		// TODO Auto-generated method stub
 		
 	}
-
+	float angle = 0;
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -193,18 +194,22 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 			
 			int newX = startX-e.getX();
 			int newY = startY-e.getY();
-			float angle = 0;
+			int speed = 0;
+			
+			
+			angle = (float)Math.atan((float)newY/ (float)newX);
+			
 			if(newX > 0){
-				angle = (float)Math.atan((float)newX/ (float)newY );
+				speed=-8;
 			}else{
-				angle = (float)Math.atan((float)newY/ (float)newX);
+				speed=8;
 			}
 			
 			
 		
 			
 			System.out.println(angle);
-			manager.addObject(new Projectile(startX+20, startY+20, 10, 10, angle));
+			manager.addObject(new Projectile(startX+20, startY+20, 10, 10, angle, speed));
 			
 		}
 		

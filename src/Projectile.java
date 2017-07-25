@@ -7,10 +7,11 @@ public class Projectile extends GameObject {
 	float angle = 0;
 	int numberOfProjectiles = 4;
 
-	public Projectile(int x, int y, int width, int height, float angle) {
+	public Projectile(int x, int y, int width, int height, float angle, int speed) {
 		super(x, y, width, height);
-		this.speed = 8;
-		this.angle=angle;
+		this.speed = speed;
+		this.angle = angle;
+
 	}
 
 	void draw(Graphics g) {
@@ -24,8 +25,50 @@ public class Projectile extends GameObject {
 
 		super.update();
 
-		x+=Math.cos(angle)*speed;
-		y+=Math.sin(angle)*speed;
-	}
+		if(x>Runner.width-15){
+			
+			angle -= Math.PI/2;
+			
+			//angle-=angle;
+			
+			
+		}
+		if(x<15){
+			
+			angle += Math.PI/2;
+			//angle+=angle;
+			
+		}
+		if(y<15&&x<250){
+			
+			angle -= Math.PI/2;
+			
+		}else if(y<15&&x>250){
+			
+			angle += Math.PI/2;
+			
+		}
+		if (y>Runner.height-10&&x>250){
+			
+			//reset round
+			
+			
+			//Testing Purposes:
+			angle -= Math.PI/2;
+			
+		}else if(y<Runner.height&&x<250){
+			
+			angle += Math.PI/2;
+			
+		}
+			
+			
+			
+		
+
+	x+=Math.cos(angle)*speed;
+	y+=Math.sin(angle)*speed;
+
+}
 
 }
