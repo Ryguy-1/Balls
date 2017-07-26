@@ -15,12 +15,12 @@ import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener, MouseListener {
 
-	Font bigFont;
-	Font smallFont;
+	static Font bigFont;
+	static Font smallFont;
 
 	int startX = 250;
-	int startY= 700;
-	
+	int startY = 700;
+
 	ArrayList<Integer> keys = new ArrayList<>();
 
 	Character character = new Character(startX, startY, 50, 50);
@@ -157,8 +157,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 
-			//manager.addObject(new Projectile(character.x + 20, character.y, 10, 10, new Random().nextFloat()));
-
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -181,56 +179,55 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
+
 	float angle = 0;
+
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
-		
-		
-		if (currentState == GAME_STATE){
-			
-			int newX = startX-e.getX();
-			int newY = startY-e.getY();
+
+		if (currentState == GAME_STATE) {
+
+			int newX = startX - e.getX();
+			int newY = startY - e.getY();
 			int speed = 0;
-			
-			
-			angle = (float)Math.atan((float)newY/ (float)newX);
-			
-			if(newX > 0){
-				speed=-8;
-			}else{
-				speed=8;
+
+			angle = (float) Math.atan((float) newY / (float) newX);
+
+			if (newX > 0) {
+				speed = -8;
+			} else {
+				speed = 8;
 			}
-			
-			
+
 		
+
+				manager.addObject(new Projectile(startX + 20, startY + 20, 10, 10, angle, speed));
+				
 			
-			System.out.println(angle);
-			manager.addObject(new Projectile(startX+20, startY+20, 10, 10, angle, speed));
-			
+
 		}
-		
+
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

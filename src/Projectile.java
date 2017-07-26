@@ -5,7 +5,7 @@ public class Projectile extends GameObject {
 
 	int speed;
 	float angle = 0;
-	int numberOfProjectiles = 4;
+	static int numberOfProjectiles = 4;
 
 	public Projectile(int x, int y, int width, int height, float angle, int speed) {
 		super(x, y, width, height);
@@ -25,6 +25,10 @@ public class Projectile extends GameObject {
 
 		super.update();
 
+		
+			
+		
+		
 		if(x>Runner.width-15){
 			
 			angle -= Math.PI/2;
@@ -41,18 +45,23 @@ public class Projectile extends GameObject {
 		}
 		if(y<15&&x<250){
 			
-			angle -= Math.PI/2;
+			angle -= Math.PI/8;
 			
 		}else if(y<15&&x>250){
 			
-			angle += Math.PI/2;
+			angle += Math.PI/8;
 			
 		}
 		if (y>Runner.height-10){
 			
-			//reset round
+			isAlive=false;
 			
 		}
+			
+				
+				
+				
+				
 			
 			
 			
@@ -63,4 +72,18 @@ public class Projectile extends GameObject {
 
 }
 
-}
+	void bounce(){
+		
+		if(angle>Math.PI/2){
+			System.out.println("upper Left");
+			angle -= Math.PI/2;
+			
+		}
+		
+		
+	}
+	
+	
+	}
+
+

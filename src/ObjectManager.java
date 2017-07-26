@@ -63,11 +63,19 @@ public class ObjectManager {
 				if(o1.collisionBox.intersects(o2.collisionBox)){
 					if((o1 instanceof Block && o2 instanceof Projectile) ||
 					   (o2 instanceof Block && o1 instanceof Projectile)){
+						if(o1 instanceof Block){
+							((Block) o1).collision();
+							((Projectile) o2).bounce();
+						}else if(o2 instanceof Block){
+							((Block) o2).collision();
+						}else{
 						score++;
-						System.out.println(score);
+						//System.out.println(score);
 						o1.isAlive = false;
 						o2.isAlive = false;
 					}
+					}
+					
 					else if((o1 instanceof Block && o2 instanceof Character) ||
 							(o2 instanceof Block && o1 instanceof Character)){
 						
@@ -77,8 +85,10 @@ public class ObjectManager {
 	
 				}
 			}
+			}
 		}
-	}
+	
+
 	
 	public int getScore(){
 		return score;
