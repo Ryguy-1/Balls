@@ -54,7 +54,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		bigFont = new Font("Arial", Font.PLAIN, 48);
 		smallFont = new Font("Arial", Font.PLAIN, 22);
 
-		manager.addObject(character);
+		manager.addCharacter(character);
 
 	}
 
@@ -72,7 +72,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	}
 
 	void updateGameState() {
-
 		manager.manageEnemies();
 		manager.checkCollision();
 		manager.getScore();
@@ -84,8 +83,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 			manager.reset();
 
 		}
-		manager.addObject(character);
+		manager.addCharacter(character);
 		manager.update();
+		
 	}
 
 	void updateEndState() {
@@ -202,11 +202,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 				speed = 8;
 			}
 
-		
-
-				manager.addObject(new Projectile(startX + 20, startY + 20, 10, 10, angle, speed));
-				
-			
+			manager.addProjectile(new Projectile(startX + 20, startY + 20, 10, 10, angle, speed));
 
 		}
 

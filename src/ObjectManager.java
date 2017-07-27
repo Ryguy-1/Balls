@@ -4,101 +4,132 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class ObjectManager {
-	ArrayList<GameObject> objects;
-	
+	// ArrayList<GameObject> objects;
+	ArrayList<Block> blocks;
+	ArrayList<Projectile> projectiles;
+	ArrayList<Character> characters;
 	private int score = 0;
-	
+
 	long enemyTimer = 0;
 	int enemySpawnTime = 1000;
-	
+
 	public ObjectManager() {
-		objects = new ArrayList<GameObject>();
+		// objects = new ArrayList<GameObject>();
+		blocks = new ArrayList<Block>();
+		projectiles = new ArrayList<Projectile>();
+		characters = new ArrayList<Character>();
 	}
 
-	public void addObject(GameObject o) {
-		objects.add(o);
+	public void addBlock(Block b) {
+		blocks.add(b);
 	}
-	
+
+	public void addProjectile(Projectile p) {
+		projectiles.add(p);
+
+	}
+
+	public void addCharacter(Character c) {
+		characters.add(c);
+
+	}
+
 	public void update() {
-		
-		
-		
-		
-		for (int i = 0; i < objects.size(); i++) {
-			GameObject o = objects.get(i);
-			o.update();
+
+		for (int i = 0; i < blocks.size(); i++) {
+			Block b = blocks.get(i);
+			b.update();
+
 		}
-		
-		purgeObjects();	
+		for (int i = 0; i < projectiles.size(); i++) {
+			Projectile p = projectiles.get(i);
+			p.update();
+
+		}
+		for (int i = 0; i < characters.size(); i++) {
+			Character c = characters.get(i);
+			c.update();
+		}
+
+		purgeObjects();
 	}
 
 	public void draw(Graphics g) {
-		for (int i = 0; i < objects.size(); i++) {
-			GameObject o = objects.get(i);
-			o.draw(g);
+		for (int i = 0; i < blocks.size(); i++) {
+			Block b = blocks.get(i);
+			b.draw(g);
+
+		}
+		for (int i = 0; i < projectiles.size(); i++) {
+			Projectile p = projectiles.get(i);
+			p.draw(g);
+		}
+		for (int i = 0; i < characters.size(); i++) {
+			Character c = characters.get(i);
+			c.draw(g);
 		}
 	}
 
 	private void purgeObjects() {
-		for (int i = 0; i < objects.size(); i++) {
-			if (!objects.get(i).isAlive) {
-				objects.remove(i);
+		for (int i = 0; i < blocks.size(); i++) {
+			if (!blocks.get(i).isAlive) {
+				blocks.remove(i);
 			}
 		}
+		for (int i = 0; i < projectiles.size(); i++) {
+			if (!projectiles.get(i).isAlive) {
+				projectiles.remove(i);
+			}
+		}
+		for (int i = 0; i < characters.size(); i++) {
+			if (!characters.get(i).isAlive) {
+				characters.remove(i);
+			}
+		}
+
 	}
 
-	public void manageEnemies(){
-		if(System.currentTimeMillis() - enemyTimer >= enemySpawnTime){
-			addObject(new Block(new Random().nextInt(Runner.width), 0, 50, 50));
+	public void manageEnemies() {
+		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
+			addBlock(new Block(new Random().nextInt(Runner.width), 0, 50, 50));
 			enemyTimer = System.currentTimeMillis();
 		}
 	}
 
 	public void checkCollision() {
-		for (int i = 0; i < objects.size(); i++) {
-			for (int j = i + 1; j < objects.size(); j++) {
-				GameObject o1 = objects.get(i);
-				GameObject o2 = objects.get(j);
-				
-				if(o1.collisionBox.intersects(o2.collisionBox)){
-					if((o1 instanceof Block && o2 instanceof Projectile) ||
-					   (o2 instanceof Block && o1 instanceof Projectile)){
-						if(o1 instanceof Block){
-							((Block) o1).collision();
-							((Projectile) o2).bounce();
-						}else if(o2 instanceof Block){
-							((Block) o2).collision();
-						}else{
-						score++;
-						//System.out.println(score);
-						o1.isAlive = false;
-						o2.isAlive = false;
-					}
-					}
-					
-					else if((o1 instanceof Block && o2 instanceof Character) ||
-							(o2 instanceof Block && o1 instanceof Character)){
-						
-						o1.isAlive = false;
-						o2.isAlive = false;
-					}
-	
+		for (int i = 0; i < blocks.size(); i++) {
+			for (int j = i + 1; j < projectiles.size(); j++) {
+
+				Projectile p = projectiles.get(j);
+				Block b = blocks.get(i);
+				Character c = characters.get(i);
+
+				if (p.collisionBox.intersects(b.collisionBox)) {
+
+					b.collision();
+					p.bounce(b);
+
+				}
+				if (b.collisionBox.intersects(c.collisionBox)) {
+
+					GamePanel.currentState = GamePanel.END_STATE;
+					reset();
 				}
 			}
-			}
 		}
-	
+	}
 
-	
-	public int getScore(){
+	public int getScore() {
 		return score;
 	}
-	
-	public void setScore(int s){
+
+	public void setScore(int s) {
 		score = s;
 	}
-	
-	public void reset(){
-		objects.clear();
+
+	public void reset() {
+		blocks.clear();
+		projectiles.clear();
+		characters.clear();
 	}
 }

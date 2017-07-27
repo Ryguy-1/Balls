@@ -37,17 +37,17 @@ public class Projectile extends GameObject {
 			
 			
 		}
-		if(x<15){
+		if(x<0){
 			
 			angle += Math.PI/2;
 			//angle+=angle;
 			
 		}
-		if(y<15&&x<250){
+		if(y<0&&x<250){
 			
 			angle -= Math.PI/8;
 			
-		}else if(y<15&&x>250){
+		}else if(y<0&&x>250){
 			
 			angle += Math.PI/8;
 			
@@ -58,27 +58,28 @@ public class Projectile extends GameObject {
 			
 		}
 			
-				
-				
-				
-				
-			
-			
-			
-		
 
 	x+=Math.cos(angle)*speed;
 	y+=Math.sin(angle)*speed;
 
 }
 
-	void bounce(){
+	void bounce(Block b){
 		
-		if(angle>Math.PI/2){
-			System.out.println("upper Left");
+		//if(angle>Math.PI/2){
+			
 			angle -= Math.PI/2;
 			
-		}
+			while(b.collisionBox.intersects(collisionBox)){
+				
+				x+=Math.cos(angle)*speed;
+				y+=Math.sin(angle)*speed;
+				
+			}
+			
+			
+			
+		//}
 		
 		
 	}

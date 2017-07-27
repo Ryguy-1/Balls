@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Random;
 
@@ -12,11 +13,11 @@ public class Block extends GameObject {
 		super(x, y, width, height);
 		this.speed = 55;
 		value = random.nextInt(10);
-		System.out.println(value);
+		
 	}
 
 	void draw(Graphics g) {
-
+		g.setColor(Color.BLUE);
 		g.drawRect(x, y, width, height);
 		g.setFont(GamePanel.smallFont);
 		g.drawString("" + value, x + 20, y + 20);
@@ -38,20 +39,12 @@ public class Block extends GameObject {
 			}
 
 		}
-		
-		
-			
-			
 			
 		}
-		
-		
-
 
 	void collision(){
-		
 		value--;
-		
+		//*100=testing
 		if (value<=0){
 			
 			isAlive=false;
