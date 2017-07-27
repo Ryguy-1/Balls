@@ -72,8 +72,14 @@ public class Projectile extends GameObject {
 			
 			while(b.collisionBox.intersects(collisionBox)){
 				
-				x+=Math.cos(angle)*speed;
-				y+=Math.sin(angle)*speed;
+				
+				
+				
+				
+				//Freezes game
+				
+				//x+=Math.cos(angle)*speed;
+				//y+=Math.sin(angle)*speed;
 				
 			}
 			
