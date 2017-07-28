@@ -8,19 +8,20 @@ public class Block extends GameObject {
 	int turn;
 	Random random = new Random();
 	int value;
+	int printValue;
 
 	public Block(int x, int y, int width, int height) {
 		super(x, y, width, height);
 		this.speed = 55;
-		value = random.nextInt(10);
-		
+		value = random.nextInt(9);
+		printValue=value+1;
 	}
 
 	void draw(Graphics g) {
 		g.setColor(Color.BLUE);
 		g.drawRect(x, y, width, height);
 		g.setFont(GamePanel.smallFont);
-		g.drawString("" + value, x + 20, y + 20);
+		g.drawString("" + printValue, x + 20, y + 20);
 
 	}
 
@@ -28,8 +29,7 @@ public class Block extends GameObject {
 
 		super.update();
 		turn = (turn + 1) % 60;
-		if (turn == 0) {
-
+		
 			y += speed;
 
 			if (y > 750) {
@@ -40,9 +40,10 @@ public class Block extends GameObject {
 
 		}
 			
-		}
+		
 
 	void collision(){
+		printValue--;
 		value--;
 		//*100=testing
 		if (value<=0){

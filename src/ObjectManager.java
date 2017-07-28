@@ -10,6 +10,9 @@ public class ObjectManager {
 	ArrayList<Character> characters;
 	private int score = 0;
 
+
+	
+	
 	long enemyTimer = 0;
 	int enemySpawnTime = 1000;
 
@@ -36,11 +39,11 @@ public class ObjectManager {
 
 	public void update() {
 
-		for (int i = 0; i < blocks.size(); i++) {
-			Block b = blocks.get(i);
-			b.update();
-
-		}
+//		for (int i = 0; i < blocks.size(); i++) {
+//			Block b = blocks.get(i);
+//			b.update();
+//
+//		}
 		for (int i = 0; i < projectiles.size(); i++) {
 			Projectile p = projectiles.get(i);
 			p.update();
@@ -80,6 +83,11 @@ public class ObjectManager {
 			if (!projectiles.get(i).isAlive) {
 				projectiles.remove(i);
 			}
+			if(Projectile.numberOfProjectiles==0&&projectiles.size()==0){
+				Projectile.numberOfProjectiles=Projectile.previousNumberOfProjectiles;
+				manageEnemies();
+				
+			}
 		}
 		for (int i = 0; i < characters.size(); i++) {
 			if (!characters.get(i).isAlive) {
@@ -90,22 +98,46 @@ public class ObjectManager {
 	}
 
 	public void manageEnemies() {
-		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
-			addBlock(new Block(new Random().nextInt(Runner.width), 0, 50, 50));
-			enemyTimer = System.currentTimeMillis();
+		
+		
+		
+		for (int i = 0; i < blocks.size(); i++) {
+			Block b = blocks.get(i);
+			b.update();
+
 		}
+		
+		
+		
+		
+		
+//		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
+		if(projectiles.size()==0){
+			int randy = new Random().nextInt(10);
+			for (int i = 0; i < randy; i++) {	
+			addBlock(new Block(new Random().nextInt(Runner.width-50), 0, 50, 50));
+			//enemyTimer = System.currentTimeMillis();
+			
+		}
+		}
+		
+		
+			//addBlock(new Block(new Random().nextInt(Runner.width), 0, 50, 50));
+		//}
+		
+		
 	}
 
 	public void checkCollision() {
 		for (int i = 0; i < blocks.size(); i++) {
-			for (int j = i + 1; j < projectiles.size(); j++) {
+			for (int j = 0; j < projectiles.size(); j++) {
 
 				Projectile p = projectiles.get(j);
 				Block b = blocks.get(i);
 				Character c = characters.get(i);
 
 				if (p.collisionBox.intersects(b.collisionBox)) {
-
+					System.out.println("collision");
 					b.collision();
 					p.bounce(b);
 

@@ -72,7 +72,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 	}
 
 	void updateGameState() {
-		manager.manageEnemies();
+		//manager.manageEnemies();
 		manager.checkCollision();
 		manager.getScore();
 
@@ -201,8 +201,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 			} else {
 				speed = 8;
 			}
+			
+			if(Projectile.numberOfProjectiles>0){
+				
+				manager.addProjectile(new Projectile(startX + 20, startY + 20, 10, 10, angle, speed));
+				Projectile.numberOfProjectiles-=1;
+				System.out.println(Projectile.numberOfProjectiles);
+			}
+				
 
-			manager.addProjectile(new Projectile(startX + 20, startY + 20, 10, 10, angle, speed));
 
 		}
 

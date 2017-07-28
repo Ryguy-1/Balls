@@ -6,12 +6,13 @@ public class Projectile extends GameObject {
 	int speed;
 	float angle = 0;
 	static int numberOfProjectiles = 4;
+	static int previousNumberOfProjectiles = numberOfProjectiles;
 
 	public Projectile(int x, int y, int width, int height, float angle, int speed) {
 		super(x, y, width, height);
 		this.speed = speed;
 		this.angle = angle;
-
+		
 	}
 
 	void draw(Graphics g) {
@@ -37,7 +38,7 @@ public class Projectile extends GameObject {
 			
 			
 		}
-		if(x<0){
+		if(x<15){
 			
 			angle += Math.PI/2;
 			//angle+=angle;
@@ -70,7 +71,7 @@ public class Projectile extends GameObject {
 			
 			angle -= Math.PI/2;
 			
-			while(b.collisionBox.intersects(collisionBox)){
+			if(b.collisionBox.intersects(collisionBox)){
 				
 				
 				
@@ -78,8 +79,8 @@ public class Projectile extends GameObject {
 				
 				//Freezes game
 				
-				//x+=Math.cos(angle)*speed;
-				//y+=Math.sin(angle)*speed;
+				x+=Math.cos(angle)*speed;
+				y+=Math.sin(angle)*speed;
 				
 			}
 			
