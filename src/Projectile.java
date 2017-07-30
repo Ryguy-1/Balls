@@ -26,6 +26,8 @@ public class Projectile extends GameObject {
 	void update() {
 
 		super.update();
+		double xVelocity = Math.cos(angle) * speed;
+		double yVelocity = Math.sin(angle) * speed;
 		x += Math.cos(angle) * speed;
 		y += Math.sin(angle) * speed;
 		
