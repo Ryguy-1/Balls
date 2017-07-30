@@ -7,12 +7,13 @@ public class Projectile extends GameObject {
 	float angle = 0;
 	static int numberOfProjectiles = 4;
 	static int previousNumberOfProjectiles = numberOfProjectiles;
-
+	double xBounce = Math.PI/2;
+	double yBounce = Math.PI/8;
 	public Projectile(int x, int y, int width, int height, float angle, int speed) {
 		super(x, y, width, height);
 		this.speed = speed;
 		this.angle = angle;
-		
+
 	}
 
 	void draw(Graphics g) {
@@ -25,73 +26,64 @@ public class Projectile extends GameObject {
 	void update() {
 
 		super.update();
+		x += Math.cos(angle) * speed;
+		y += Math.sin(angle) * speed;
+		
+		if(y>0){
+			
+			
+		}
+		
+		if (x > Runner.width - 0) {
+
+			angle -= xBounce;
+
+			// angle-=angle;
+
+		}
+
+		if (y < 0 && x < Runner.width / 2) {
+
+			angle -= yBounce;
+
+		} else if (y < 0 && x >= Runner.width / 2) {
+
+			angle += yBounce;
+
+		}
+		if (y > Runner.height - 10) {
+
+			isAlive = false;
+
+		}
+		if (x < 0) {
+
+			angle += xBounce;
+			// angle+=angle;
+
+		}
 
 		
-			
-		
-		
-		if(x>Runner.width-15){
-			
-			angle -= Math.PI/2;
-			
-			//angle-=angle;
-			
-			
-		}
-		if(x<15){
-			
-			angle += Math.PI/2;
-			//angle+=angle;
-			
-		}
-		if(y<0&&x<250){
-			
-			angle -= Math.PI/8;
-			
-		}else if(y<0&&x>250){
-			
-			angle += Math.PI/8;
-			
-		}
-		if (y>Runner.height-10){
-			
-			isAlive=false;
-			
-		}
-			
 
-	x+=Math.cos(angle)*speed;
-	y+=Math.sin(angle)*speed;
+	}
+
+	void bounce(Block b) {
+
+		// if(angle>Math.PI/2){
+
+		angle -= xBounce;
+
+		if (b.collisionBox.intersects(collisionBox)) {
+
+			// Freezes game
+
+			x += Math.cos(angle) * speed;
+			y += Math.sin(angle) * speed;
+
+		}
+
+		// }
+
+	}
 
 }
-
-	void bounce(Block b){
-		
-		//if(angle>Math.PI/2){
-			
-			angle -= Math.PI/2;
-			
-			if(b.collisionBox.intersects(collisionBox)){
-				
-				
-				
-				
-				
-				//Freezes game
-				
-				x+=Math.cos(angle)*speed;
-				y+=Math.sin(angle)*speed;
-				
-			}
-			
-			
-			
-		//}
-		
-		
-	}
-	
-	
-	}
-
-
