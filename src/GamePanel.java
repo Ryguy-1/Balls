@@ -49,7 +49,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 
 	GamePanel() {
 
-		timer = new Timer(1000 / 60, this);
+		timer = new Timer(1000 / 120, this);
 
 		bigFont = new Font("Arial", Font.PLAIN, 48);
 		smallFont = new Font("Arial", Font.PLAIN, 22);

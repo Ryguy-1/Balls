@@ -36,20 +36,23 @@ public class Projectile extends GameObject {
 			
 		}
 		
-		if (x > Runner.width - 0) {
+		if (x > Runner.width - 10 && y <= Runner.height/2) {
 
-			angle -= xBounce;
+			angle += xBounce;
 
 			// angle-=angle;
 
+		}else if(x > Runner.width-10 && y > Runner.height/2){
+			
+			angle -= xBounce;
+			
 		}
 
 		if (y < 0 && x < Runner.width / 2) {
 
-			angle -= yBounce;
+			angle += yBounce;
 
 		} else if (y < 0 && x >= Runner.width / 2) {
-
 			angle += yBounce;
 
 		}
@@ -58,11 +61,15 @@ public class Projectile extends GameObject {
 			isAlive = false;
 
 		}
-		if (x < 0) {
+		if (x < 0 && y <= Runner.height/2) {
 
 			angle += xBounce;
 			// angle+=angle;
 
+		}else if(x<0 && y > Runner.height/2){
+			
+			angle -=xBounce;
+			
 		}
 
 		
@@ -75,14 +82,14 @@ public class Projectile extends GameObject {
 
 		angle -= xBounce;
 
-		if (b.collisionBox.intersects(collisionBox)) {
+		//if (b.collisionBox.intersects(collisionBox)) {
 
 			
 
 			x += Math.cos(angle) * speed;
 			y += Math.sin(angle) * speed;
 
-		}
+	//	}
 
 		// }
 

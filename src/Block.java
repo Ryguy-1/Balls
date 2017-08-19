@@ -28,9 +28,9 @@ public class Block extends GameObject {
 	void update() {
 
 		super.update();
-		turn = (turn + 1) % 60;
+		//turn = (turn + 1) % 60;
 		
-			y += speed;
+		//	y += speed;
 
 			if (y > 750) {
 
@@ -45,7 +45,7 @@ public class Block extends GameObject {
 	void collision(){
 		printValue--;
 		value--;
-		//*100=testing
+		
 		if (value<=0){
 			
 			isAlive=false;

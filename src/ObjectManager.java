@@ -36,11 +36,11 @@ public class ObjectManager {
 
 	public void update() {
 
-		// for (int i = 0; i < blocks.size(); i++) {
-		// Block b = blocks.get(i);
+		 //for (int i = 0; i < blocks.size(); i++) {
+		 //Block b = blocks.get(i);
 		// b.update();
-		//
-		// }
+		 //}
+		
 		for (int i = 0; i < projectiles.size(); i++) {
 			Projectile p = projectiles.get(i);
 			p.update();
@@ -82,6 +82,7 @@ public class ObjectManager {
 			}
 			if (Projectile.numberOfProjectiles == 0 && projectiles.size() == 0) {
 				Projectile.numberOfProjectiles = Projectile.previousNumberOfProjectiles;
+				
 				manageEnemies();
 
 			}
@@ -102,7 +103,7 @@ public class ObjectManager {
 
 		}
 
-		// if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
+		
 		if (projectiles.size() == 0) {
 			int randy = new Random().nextInt(10);
 
@@ -115,19 +116,7 @@ public class ObjectManager {
 					if(blocks.get(j).y==blockY){
 					xpos.add(blocks.get(j).x);
 					}
-//					// if(blocks.get(i).x==blockX&&blocks.get(i).y==blockY){
-//					while (blockX == blocks.get(j).x && blocks.get(j).y == blockY) {
-//						System.out.println("while");
-//						blockX = new Random().nextInt(10) * 50;
-//						System.out.println(blockX);
-//					}
-//
-//					// }
-//
-//				}
-//				System.out.println(blockX);
-				
-				// enemyTimer = System.currentTimeMillis();
+					
 				
 			}
 				while(xpos.contains(blockX)){
@@ -139,9 +128,6 @@ public class ObjectManager {
 				addBlock(new Block(blockX, blockY, 50, 50));
 			}
 		}
-
-		// addBlock(new Block(new Random().nextInt(Runner.width), 0, 50, 50));
-		// }
 
 	}
 
