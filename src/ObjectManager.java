@@ -8,7 +8,10 @@ public class ObjectManager {
 	ArrayList<Block> blocks;
 	ArrayList<Projectile> projectiles;
 	ArrayList<Character> characters;
-	private int score = 0;
+	static int score = 0;
+	static int highScore = 0;
+	static int turn = 1;
+	
 
 	long enemyTimer = 0;
 	int enemySpawnTime = 1000;
@@ -82,7 +85,8 @@ public class ObjectManager {
 			}
 			if (Projectile.numberOfProjectiles == 0 && projectiles.size() == 0) {
 				Projectile.numberOfProjectiles = Projectile.previousNumberOfProjectiles;
-				
+				Projectile.numberOfProjectiles += 1;
+				Projectile.previousNumberOfProjectiles+=1;
 				manageEnemies();
 
 			}
@@ -127,6 +131,7 @@ public class ObjectManager {
 				}
 				addBlock(new Block(blockX, blockY, 50, 50));
 			}
+			turn+=1;
 		}
 
 	}
@@ -143,6 +148,7 @@ public class ObjectManager {
 					System.out.println("collision");
 					b.collision();
 					p.bounce(b);
+					
 
 				}
 				if (b.collisionBox.intersects(c.collisionBox)) {
@@ -159,9 +165,7 @@ public class ObjectManager {
 		return score;
 	}
 
-	public void setScore(int s) {
-		score = s;
-	}
+
 
 	public void reset() {
 		blocks.clear();

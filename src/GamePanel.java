@@ -10,6 +10,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -17,9 +18,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 
 	static Font bigFont;
 	static Font smallFont;
+	
 
 	int startX = 250;
 	int startY = 700;
+	
+	static int timeSpeed = 60;
 
 	ArrayList<Integer> keys = new ArrayList<>();
 
@@ -49,7 +53,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 
 	GamePanel() {
 
-		timer = new Timer(1000 / 60, this);
+		timer = new Timer(1000 / timeSpeed, this);
 
 		bigFont = new Font("Arial", Font.PLAIN, 48);
 		smallFont = new Font("Arial", Font.PLAIN, 22);
@@ -104,13 +108,26 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		// g.setColor(Color.ORANGE);
 		g.setFont(smallFont);
 		g.drawString("Press Enter To Begin", 150, 650);
+		
+		JButton speed = new JButton();
+		
+		speed.setVisible(true);
+		speed.setBounds(50, 750, 50, 50);
+		
 	}
 
 	void drawGameState(Graphics g) {
 
-		g.setColor(Color.BLACK);
+		g.setColor(Color.GREEN);
 		g.fillRect(0, 0, Runner.width, Runner.height);
 
+		
+		g.setColor(Color.GRAY);
+		g.setFont(smallFont);
+		g.drawString("" + ObjectManager.score, 475, 720);
+		g.drawString("" + Projectile.numberOfProjectiles, 225, 720);
+		
+		
 		manager.draw(g);
 
 	}
@@ -127,6 +144,15 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.setFont(smallFont);
 		g.drawString("Press ENTER To Try Again", 150, 650);
 
+		if(ObjectManager.score>=ObjectManager.highScore) {
+			
+			ObjectManager.highScore=ObjectManager.score;
+			
+		}
+		
+		g.setFont(smallFont);
+		g.drawString("High Score - "+ ObjectManager.highScore, 150, 450);
+		
 	}
 
 	@Override

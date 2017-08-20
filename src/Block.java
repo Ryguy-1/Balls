@@ -5,22 +5,25 @@ import java.util.Random;
 public class Block extends GameObject {
 
 	int speed;
-	int turn;
 	Random random = new Random();
 	int value;
 	int printValue;
+	int randomValue = 9 * ObjectManager.turn;
 
 	public Block(int x, int y, int width, int height) {
 		super(x, y, width, height);
 		this.speed = 55;
-		value = random.nextInt(9);
+		value = random.nextInt(randomValue);
 		printValue=value+1;
 	}
 
 	void draw(Graphics g) {
-		g.setColor(Color.BLUE);
-		g.drawRect(x, y, width, height);
+		
+		g.setColor(Color.GRAY);
+		
+		g.fillRect(x, y, width, height);
 		g.setFont(GamePanel.smallFont);
+		g.setColor(Color.RED);
 		g.drawString("" + printValue, x + 20, y + 20);
 
 	}
@@ -28,15 +31,15 @@ public class Block extends GameObject {
 	void update() {
 
 		super.update();
-		//turn = (turn + 1) % 60;
 		
-		//	y += speed;
+			y += speed;
 
 			if (y > 750) {
 
 				GamePanel.currentState = GamePanel.END_STATE;
 
 			}
+			collisionBox.setBounds(x, y, width, height);
 
 		}
 			
@@ -49,6 +52,7 @@ public class Block extends GameObject {
 		if (value<=0){
 			
 			isAlive=false;
+			ObjectManager.score+=1;
 			
 		}
 		

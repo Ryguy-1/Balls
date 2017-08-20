@@ -19,12 +19,14 @@ public class Projectile extends GameObject {
 	void draw(Graphics g) {
 
 		g.setColor(Color.BLUE);
-		g.drawOval(x, y, width, height);
+		g.fillOval(x, y, width, height);
 
 	}
 
 	void update() {
 
+		
+		
 		super.update();
 		double xVelocity = Math.cos(angle) * speed;
 		double yVelocity = Math.sin(angle) * speed;
@@ -80,16 +82,18 @@ public class Projectile extends GameObject {
 
 		// if(angle>Math.PI/2){
 
-		angle -= xBounce;
+		angle-=xBounce;
 
-		//if (b.collisionBox.intersects(collisionBox)) {
+		while(b.collisionBox.intersects(collisionBox)) {
 
 			
 
-			x += Math.cos(angle) * speed;
-			y += Math.sin(angle) * speed;
+			//x += Math.cos(angle) * speed;
+			y += 1;//Math.sin(angle) * speed;
 
-	//	}
+			collisionBox.setBounds(x, y, width, height);
+			
+		}
 
 		// }
 
