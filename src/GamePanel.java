@@ -109,11 +109,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener, Mo
 		g.setFont(smallFont);
 		g.drawString("Press Enter To Begin", 150, 650);
 		
-		JButton speed = new JButton();
-		
-		speed.setVisible(true);
-		speed.setBounds(50, 750, 50, 50);
-		
 	}
 
 	void drawGameState(Graphics g) {
